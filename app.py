@@ -55,10 +55,16 @@ def process_image():
         final_image.save(output_path, format="PNG")
 
         # Return the temporary file path for preview
-        return jsonify({"status": "success", "path": f"/tmp/{output_filename}"})
+        return jsonify({"status": "success", "path": output_filename})
     
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
+
+
+@app.route("/tmp/<filename>")
+def serve_temp_file(filename):
+    return send_from_directory(OUTPUT_DIR, filename)
+
 
 @app.route("/download/<filename>")
 def download_file(filename):
