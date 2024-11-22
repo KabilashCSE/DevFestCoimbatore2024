@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadButton = document.getElementById("downloadButton");
     const shareButton = document.getElementById("shareButton");
     let cropper;
-
+  
     // Initially hide buttons
     generateButton.style.display = 'none';
     downloadButton.style.display = 'none';
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("crop_width", cropData.width);
       formData.append("crop_height", cropData.height);
   
+      // Send data to the backend to process the image
       fetch("/process", {
         method: "POST",
         body: formData,
@@ -51,8 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((result) => {
           if (result.status === "success") {
             const outputPath = result.path;
+  
+            // Update the preview image with the generated result
             previewImage.src = `/${outputPath}`;
-            
+            previewImage.style.display = "block";  // Show preview image
+  
             // Show and enable download/share buttons
             downloadButton.style.display = 'block';
             shareButton.style.display = 'block';
@@ -71,10 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const file = await fetch(`/${outputPath}`)
                   .then((res) => res.blob())
                   .then((blob) => new File([blob], filename, { type: "image/png" }));
-                await navigator.share({
-                  title: "Generated Image",
-                  files: [file],
-                });
+  
+                if (navigator.share) {
+                  await navigator.share({
+                    title: "Generated Image",
+                    files: [file],
+                  });
+                } else {
+                  alert("Sharing not supported on your browser.");
+                }
               } catch (err) {
                 alert("Sharing failed: " + err.message);
               }
@@ -82,6 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             alert("Error: " + result.message);
           }
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+          alert("Something went wrong while generating the image.");
         });
     });
-});
+  });
+  
