@@ -49,7 +49,7 @@ def process_image():
         final_image.save(output_path, format="PNG")
 
         # Return static path for preview
-        return jsonify({"status": "success", "path": f"static/output/{output_filename}"})
+        return jsonify({"status": "success", "path": f"/tmp/{output_filename}"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
