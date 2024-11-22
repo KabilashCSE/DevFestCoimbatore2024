@@ -1,0 +1,279 @@
+:root {
+  --primary-color: #4285F4;
+  --background-color: #f8f9fa;
+  --text-color: #202124;
+  --border-color: #dadce0;
+  --shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+}
+
+body {
+  font-family: 'Google Sans', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  padding-top: 0px; /* Increased padding for desktop */
+}
+
+.header {
+  width: 100%;
+  position: relative;
+  background-color: #f0f0f0;
+  overflow: visible;  /* Changed from hidden to allow full image */
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;  /* Increased padding */
+}
+
+.header-image {
+  max-width: 80%;  /* Reduced from 90% */
+  width: auto;
+  height: auto;
+  max-height: 150px;  /* Reduced height */
+  object-fit: contain;
+  object-position: center;
+  transform: scale(0.85);  /* Slight zoom out */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.left-panel,
+.right-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: var(--text-color);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  text-align: center;
+  width: 100%;
+}
+#generateButton, #downloadButton, #shareButton {
+    display: none;
+  }
+
+#fileInput {
+  display: none; /* Hide default input */
+  width: calc(100% - 24px);
+  padding: 12px;
+  border: 2px dashed var(--border-color);
+  border-radius: 4px;
+  margin: 0 auto 16px;
+  box-sizing: border-box;
+}
+
+/* Create custom file input button */
+#fileInput + label {
+  display: inline-block;
+  padding: 8px 24px;
+  background-color: #1a73e8;
+  color: white;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+  border: none;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+#fileInput + label:hover {
+  background-color: #1557b0;
+  box-shadow: 0 1px 3px 0 rgba(60,64,67,0.3),
+              0 4px 8px 3px rgba(60,64,67,0.15);
+}
+
+#fileInput + label:active {
+  background-color: #174ea6;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 24px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  min-width: 120px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #1a73e8;
+  box-shadow: var(--shadow);
+}
+
+.btn:disabled {
+  background-color: #dadce0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+  width: 100%;
+}
+
+#cropContainer,
+#previewContainer {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#cropImage,
+#previewImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #5f6368;
+  font-size: 14px;
+  background: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  
+  .header {
+    min-height: 150px;
+    height: 200px;
+    margin-bottom: 24px;
+    padding: 30px 0;
+  }
+  
+  .header-image {
+    max-height: 120px;
+    width: auto;
+    max-width: 85%;
+    object-fit: contain;
+    transform: scale(0.85);
+    background-color: #f0f0f0;
+  }
+
+  .left-panel,
+  .right-panel {
+    margin: 0 auto;
+    width: calc(100% - 32px);
+    max-width: 500px;
+  }
+
+  #cropContainer,
+  #previewContainer {
+    padding: 12px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  #fileInput {
+    padding: 8px;
+  }
+
+  #actions {
+    justify-content: center;
+    margin-top: 16px;
+  }
+}
+
+/* Add extra small device optimization */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .header {
+    min-height: 120px;
+    height: 150px;
+    padding: 25px 0;
+  }
+
+  .header-image {
+    max-height: 100px;
+    width: 100%;
+    max-width: 90%;
+    transform: scale(0.8);
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 16px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header { 
+    position: fixed;
+    padding: 10px 0;
+    margin: 0;
+    height: auto;
+    min-height: unset;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+  }
+  
+  .header-image {
+    max-width: 100%;
+    width: 100%;
+    max-height: 120px;
+    transform: none;  /* Remove any scaling */
+    object-position: top;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  body {
+    padding-top: 160px; /* Adjust for mobile header height */
+  }
+}

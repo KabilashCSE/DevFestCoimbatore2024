@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Generator</title>
+  <link rel="stylesheet" href="/static/cropper.min.css">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="header">
+    <img src="https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/event_banners/banner_devfest24_uy42yXv.png" alt="Header Image" class="header-image">
+  </header>
+
+  <main class="container">
+    <div class="left-panel">
+      <h2>Upload Your Photo</h2>
+      <input type="file" id="fileInput" accept="image/*">
+      <label for="fileInput">Choose an image</label>
+      <div id="cropContainer">
+        <img id="cropImage" style="max-width: 100%;">
+      </div>
+      <button id="generateButton" class="btn">Generate</button>
+    </div>
+
+    <div class="right-panel">
+      <h2>Preview</h2>
+      <div id="previewContainer">
+        <img id="previewImage" src="/static/sample.png" style="max-width: 100%;">
+      </div>
+      <div id="actions">
+        <button id="downloadButton" class="btn" disabled>Download</button>
+        <button id="shareButton" class="btn" disabled>Share</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© DevFest Coimbatore 2024. All Rights Reserved.</p>
+  </footer>
+
+  <script src="/static/cropper.min.js"></script>
+  <script src="/static/main.js"></script>
+</body>
+</html>
