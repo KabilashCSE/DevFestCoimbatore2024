@@ -21,7 +21,13 @@ def index():
 @app.route("/process", methods=["POST"])
 def process_image():
     try:
+        # Get the uploaded file
         file = request.files.get("file")
+        
+        # Check if file is None
+        if file is None:
+            return jsonify({"status": "error", "message": "No file uploaded."})
+        
         crop_x = float(request.form.get("crop_x", 0))
         crop_y = float(request.form.get("crop_y", 0))
         crop_width = float(request.form.get("crop_width", 0))
@@ -43,16 +49,16 @@ def process_image():
         final_image.paste(resized_cropped_image, (offset_x, offset_y), resized_cropped_image)
         final_image.paste(template_image, (0, 0), template_image)
 
-        # Save final image to /tmp (Vercel's writable directory)
+        # Save final image to /tmp
         output_filename = f"final_{int(time.time())}.png"
         output_path = os.path.join(OUTPUT_DIR, output_filename)
         final_image.save(output_path, format="PNG")
 
         # Return the temporary file path for preview
         return jsonify({"status": "success", "path": f"/tmp/{output_filename}"})
+    
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
-
 
 @app.route("/download/<filename>")
 def download_file(filename):
